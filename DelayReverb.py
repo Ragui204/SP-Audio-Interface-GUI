@@ -3,10 +3,12 @@ from PyQt5.QtWidgets import (
     QWidget, QSizePolicy, QFrame, QSpacerItem
 )
 from PyQt5.QtCore import Qt
+import can  # ✅ Add import for CAN messaging
 
-def Delay_Reverb_Controls(layout):
+def Delay_Reverb_Controls(layout, bus=None, can_address=None):
     """
     Adds volume controls and other plugin controls to the layout.
+    This version supports CAN messaging for reverb controls.
     """
     main_layout = QHBoxLayout()
     main_layout.setContentsMargins(0, 0, 0, 0)
@@ -22,12 +24,15 @@ def Delay_Reverb_Controls(layout):
     reverb_layout.addWidget(reverb_label)
     reverb_layout.addItem(QSpacerItem(10, 10, QSizePolicy.Minimum, QSizePolicy.Fixed))
     reverb_grid = QGridLayout()
-    add_plugin(reverb_grid, "Decay", 0, 0)
-    add_plugin(reverb_grid, "Size", 0, 1)
-    add_plugin(reverb_grid, "Mix", 0, 2)
-    add_plugin(reverb_grid, "Color", 1, 0)
-    add_plugin(reverb_grid, "Mod", 1, 1)
-    add_plugin(reverb_grid, "Speed", 1, 2)
+
+    # ✅ Add CAN-enabled dials
+    add_plugin(reverb_grid, "Decay", 0, 0, bus, can_address, 0x02)
+    add_plugin(reverb_grid, "Size", 0, 1, bus, can_address, 0x03)
+    add_plugin(reverb_grid, "Mix", 0, 2, bus, can_address, 0x04)
+    add_plugin(reverb_grid, "Color", 1, 0, bus, can_address, 0x05)
+    add_plugin(reverb_grid, "Mod", 1, 1, bus, can_address, 0x06)
+    add_plugin(reverb_grid, "Speed", 1, 2, bus, can_address, 0x07)
+
     reverb_layout.addLayout(reverb_grid)
     main_layout.addWidget(reverb_container)
     main_layout.addItem(QSpacerItem(0, 0, QSizePolicy.Fixed, QSizePolicy.Minimum))
@@ -37,8 +42,6 @@ def Delay_Reverb_Controls(layout):
     divider.setFrameShape(QFrame.VLine)
     divider.setFrameShadow(QFrame.Sunken)
     main_layout.addWidget(divider)
-
-
 
     # Delay
     delay_layout = QVBoxLayout()
@@ -51,30 +54,39 @@ def Delay_Reverb_Controls(layout):
     delay_layout.addWidget(delay_label)
     delay_layout.addItem(QSpacerItem(10, 50, QSizePolicy.Minimum, QSizePolicy.Fixed))
     delay_grid = QGridLayout()
-    add_plugin(delay_grid, "Time", 0, 0)
-    add_plugin(delay_grid, "Feedback", 0, 1)
-    add_plugin(delay_grid, "Mix", 0, 2)
-    add_plugin(delay_grid, "Color", 1, 0)
-    add_plugin(delay_grid, "Mod", 1, 1)
+
+    # ✅ Add CAN-enabled dials (optional — you can disable CAN for delay if you want)
+    add_plugin(delay_grid, "Time", 0, 0, bus, can_address, 0x08)
+    add_plugin(delay_grid, "Feedback", 0, 1, bus, can_address, 0x09)
+    add_plugin(delay_grid, "Mix", 0, 2, bus, can_address, 0x0A)
+    add_plugin(delay_grid, "Color", 1, 0, bus, can_address, 0x0B)
+    add_plugin(delay_grid, "Mod", 1, 1, bus, can_address, 0x0C)
+
     delay_layout.addLayout(delay_grid)
     main_layout.addWidget(delay_container)
 
     layout.addLayout(main_layout)
     layout.setAlignment(main_layout, Qt.AlignTop | Qt.AlignRight)
 
-def add_plugin(layout, name, row, col):
-    """Helper function to add a plugin with dial knob"""
+def add_plugin(layout, name, row, col, bus, can_address, command):
+    """
+    Adds a plugin control (dial) with optional CAN messaging support.
+    """
     vbox = QVBoxLayout()
     label = QLabel(name)
     label.setAlignment(Qt.AlignCenter)
+
     dial = QDial()
-    # Removed setFixedSize
     dial.setMinimum(0)
     dial.setMaximum(100)
     dial.setValue(50)
     dial.setNotchesVisible(True)
 
-    # Add shadow effect using stylesheet
+    # ✅ Send CAN message on value change
+    if bus and can_address:
+        dial.valueChanged.connect(lambda value: send_can_message(bus, can_address, command, value))
+
+    # Styling preserved from original code
     dial.setStyleSheet("""
         QDial {
             border: 5px solid #5c5c5c;
@@ -95,3 +107,15 @@ def add_plugin(layout, name, row, col):
     vbox.addWidget(label)
     vbox.addWidget(dial)
     layout.addLayout(vbox, row, col)
+
+def send_can_message(bus, address, command, value):
+    """
+    Send a CAN message for a specific control.
+    Data structure: [command, value]
+    """
+    message = can.Message(arbitration_id=address, data=[command, value], is_extended_id=False)
+    try:
+        bus.send(message)
+        print(f"Sent CAN Message: Address=0x{address:X}, Command=0x{command:02X}, Value={value}")
+    except can.CanError as e:
+        print(f"CAN Error: {e}")

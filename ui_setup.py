@@ -9,11 +9,14 @@ from equalizer import add_equalizer_controls
 from DelayReverb import Delay_Reverb_Controls
 from Volume import add_volume_controls
 from CanInit import Can_INIT  # ✅ Import CAN initialization
+from can_listener import start_can_listener
 
 class MainWindow(QMainWindow):
     def __init__(self):
         super().__init__()
         self.bus = Can_INIT()  # ✅ Initialize CAN Bus
+        if self.bus:
+            start_can_listener(self.bus)
         self.initUI()
 
     def initUI(self):
@@ -62,7 +65,7 @@ class MainWindow(QMainWindow):
 
         add_midi_pads(left_panel)
         add_equalizer_controls(left_panel)  # ✅ Pass CAN bus and address
-        Delay_Reverb_Controls(right_panel)
+        Delay_Reverb_Controls(right_panel, self.bus, self.can_addresses[tab_name])
         add_volume_controls(right_panel, self.bus, self.can_addresses[tab_name])
 
         layout.addLayout(left_panel)
@@ -78,7 +81,7 @@ class MainWindow(QMainWindow):
         right_panel = QVBoxLayout()
 
         add_equalizer_controls(left_panel)
-        Delay_Reverb_Controls(right_panel)
+        Delay_Reverb_Controls(right_panel, self.bus, self.can_addresses[tab_name])
         add_volume_controls(right_panel, self.bus, None)  # 🎸 No CAN needed
 
         layout.addLayout(left_panel)
@@ -93,7 +96,7 @@ class MainWindow(QMainWindow):
         right_panel = QVBoxLayout()
 
         add_equalizer_controls(left_panel)
-        Delay_Reverb_Controls(right_panel)
+        Delay_Reverb_Controls(right_panel, self.bus, self.can_addresses[tab_name])
         add_volume_controls(right_panel, self.bus, None)  # 🎸 No CAN needed
 
         layout.addLayout(left_panel)
