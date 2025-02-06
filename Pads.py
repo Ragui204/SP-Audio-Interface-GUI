@@ -1,43 +1,31 @@
-from PyQt5.QtWidgets import QPushButton, QGridLayout, QVBoxLayout, QLabel, QSpacerItem, QSizePolicy
+from PyQt5.QtWidgets import QPushButton, QGridLayout, QLabel
 from PyQt5.QtCore import Qt
 
 def add_midi_pads(layout):
-    # Create a vertical layout to hold the label and grid
-    pads_layout = QVBoxLayout()
-
-    # Add label for MIDI pads
-    label = QLabel("MIDI Control Pads")
+    """ Updated MIDI Pads with 3D effect and proper positioning """
+    pad_layout = QGridLayout()
+    label = QLabel("🎛️ MIDI Control Pads")
+    label.setStyleSheet("font-size: 20px; font-weight: bold; ")
     label.setAlignment(Qt.AlignCenter)
-    pads_layout.addWidget(label)
-
-    # Create a grid layout for the 2x4 MIDI pads
-    grid_layout = QGridLayout()
-
-    # Create 8 MIDI pads
+    layout.addWidget(label)
+    
     for i in range(8):
         button = QPushButton(f"Pad {i+1}")
-        button.setFixedSize(80, 80)  # Square buttons
+        button.setFixedSize(350, 350)
         button.setStyleSheet("""
             QPushButton {
-                background-color: #555;
+                background: qlineargradient(x1:0, y1:0, x2:1, y2:1, stop:0 #666, stop:1 #222);
                 color: white;
-                border: 2px solid #333;
-                border-radius: 5px;
-                font-size: 14px;
+                border: 4px solid #111;
+                border-radius: 15px;
+                font-size: 18px;
+                font-weight: bold;
+                padding: 10px;
             }
-            QPushButton:pressed {
-                background-color: #777;
-            }
+            QPushButton:hover { background: #888; }
+            QPushButton:pressed { background: #444; }
         """)
-
-        # Add buttons to the grid (2 rows, 4 columns)
-        grid_layout.addWidget(button, i // 4, i % 4)
-
-    # Add the grid layout to the vertical layout
-    pads_layout.addLayout(grid_layout)
-
-    # **Spacer at the bottom to push everything to the top-left**
-    bottom_spacer = QSpacerItem(20, 40, QSizePolicy.Minimum, QSizePolicy.Expanding)
-    layout.addLayout(pads_layout)
-    layout.addItem(bottom_spacer)  # Pushes everything up
-    layout.setAlignment(pads_layout, Qt.AlignTop | Qt.AlignLeft)
+        pad_layout.addWidget(button, i // 4, i % 4)
+    
+    layout.addLayout(pad_layout)
+    layout.setAlignment(pad_layout, Qt.AlignTop | Qt.AlignLeft)
