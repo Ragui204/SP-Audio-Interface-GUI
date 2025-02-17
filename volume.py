@@ -1,36 +1,20 @@
 from PyQt5.QtWidgets import (
-    QApplication,
-    QLabel,
-    QDial,
-    QVBoxLayout,
-    QGridLayout,
-    QHBoxLayout,
-    QWidget,
-    QSizePolicy,
-    QFrame,
-    QSpacerItem
+    QApplication, QLabel, QDial, QVBoxLayout, QGridLayout, QHBoxLayout,
+    QWidget, QSizePolicy, QFrame, QSpacerItem
 )
 from PyQt5.QtCore import Qt
-
 
 def add_volume_controls(layout):
     """
     Adds volume controls and other plugin controls to the layout.
     """
-    main_layout = QHBoxLayout()  # Use QHBoxLayout for horizontal arrangement
-    main_layout.setContentsMargins(0, 0, 0, 0)  # Remove extra margins
-    
-    # Reverb
-# In the add_volume_controls function
+    main_layout = QHBoxLayout()
+    main_layout.setContentsMargins(0, 0, 0, 0)
 
     # Reverb
     reverb_layout = QVBoxLayout()
-
-    # Create a container widget for the reverb box
     reverb_container = QWidget()
-    reverb_container.setStyleSheet("background-color: #555;")  # Example color: dark gray
-
-    # Add the reverb layout to the container
+    reverb_container.setStyleSheet("background-color: #555;")
     reverb_container.setLayout(reverb_layout)
 
     reverb_label = QLabel("Reverb")
@@ -45,10 +29,8 @@ def add_volume_controls(layout):
     add_plugin(reverb_grid, "Mod", 1, 1)
     add_plugin(reverb_grid, "Speed", 1, 2)
     reverb_layout.addLayout(reverb_grid)
-
-    # Add the reverb container to the main layout
-    main_layout.addWidget(reverb_container)  # Add reverb first
-    main_layout.addItem(QSpacerItem(0, 0, QSizePolicy.Fixed, QSizePolicy.Minimum))      
+    main_layout.addWidget(reverb_container)
+    main_layout.addItem(QSpacerItem(0, 0, QSizePolicy.Fixed, QSizePolicy.Minimum))
 
     # Add divider
     divider = QFrame()
@@ -59,40 +41,31 @@ def add_volume_controls(layout):
     # Volume Controls
     volume_layout = QVBoxLayout()
     volume_layout.setAlignment(Qt.AlignCenter)
-
-    # Create a container widget for the volume box
     volume_container = QWidget()
-    volume_container.setStyleSheet("background-color: #555;")  # Example color: dark gray
-    volume_container.setLayout(volume_layout)  # Add the volume layout to the container
+    volume_container.setStyleSheet("background-color: #555;")
+    volume_container.setLayout(volume_layout)
 
     volume_label = QLabel("Volume")
     volume_label.setAlignment(Qt.AlignCenter)
     volume_knob = QDial()
-    volume_knob.setFixedSize(300, 300)
-    #volume_knob.setMaximum(300)
-    #volume_knob.setValue(50)
+    # Removed setFixedSize
     volume_knob.setNotchesVisible(True)
     volume_layout.addWidget(volume_label)
     volume_layout.addWidget(volume_knob)
-
-    # Add the volume container to the main layout
-    main_layout.addWidget(volume_container)  # Add volume in the middle
-    main_layout.addItem(QSpacerItem(0,0, QSizePolicy.Fixed, QSizePolicy.Minimum))
+    main_layout.addWidget(volume_container)
+    main_layout.addItem(QSpacerItem(0, 0, QSizePolicy.Fixed, QSizePolicy.Minimum))
 
     # Add divider
     divider = QFrame()
     divider.setFrameShape(QFrame.VLine)
     divider.setFrameShadow(QFrame.Sunken)
-    divider.setLineWidth(0)  # Set the line width to 5 pixels
     main_layout.addWidget(divider)
 
     # Delay
     delay_layout = QVBoxLayout()
-
-    # Create a container widget for the delay box
     delay_container = QWidget()
-    delay_container.setStyleSheet("background-color: #555;")  # Example color: dark gray
-    delay_container.setLayout(delay_layout)  # Add the delay layout to the container
+    delay_container.setStyleSheet("background-color: #555;")
+    delay_container.setLayout(delay_layout)
 
     delay_label = QLabel("Delay")
     delay_label.setAlignment(Qt.AlignCenter)
@@ -105,13 +78,10 @@ def add_volume_controls(layout):
     add_plugin(delay_grid, "Color", 1, 0)
     add_plugin(delay_grid, "Mod", 1, 1)
     delay_layout.addLayout(delay_grid)
-
-    # Add the delay container to the main layout
-    main_layout.addWidget(delay_container)  # Add delay last
+    main_layout.addWidget(delay_container)
 
     layout.addLayout(main_layout)
     layout.setAlignment(main_layout, Qt.AlignTop | Qt.AlignRight)
-
 
 def add_plugin(layout, name, row, col):
     """Helper function to add a plugin with dial knob"""
@@ -119,7 +89,7 @@ def add_plugin(layout, name, row, col):
     label = QLabel(name)
     label.setAlignment(Qt.AlignCenter)
     dial = QDial()
-    dial.setFixedSize(200, 270)
+    # Removed setFixedSize
     dial.setMinimum(0)
     dial.setMaximum(100)
     dial.setValue(50)
@@ -128,18 +98,18 @@ def add_plugin(layout, name, row, col):
     # Add shadow effect using stylesheet
     dial.setStyleSheet("""
         QDial {
-            border: 5px solid #5c5c5c;  /* Add a border for better visibility */
-            border-radius: 50px;  /* Adjust border-radius as needed */
+            border: 5px solid #5c5c5c;
+            border-radius: 50px;
         }
         QDial::handle {
-            background-color: qlineargradient(x1:0, y1:0, x2:1, y2:1, 
-                                              stop:0 #ffffff, stop:1 #c0c0c0);  /* Light gray gradient */
+            background-color: qlineargradient(x1:0, y1:0, x2:1, y2:1,
+                                              stop:0 #ffffff, stop:1 #c0c0c0);
             border: 1px solid #5c5c5c;
             width: 20px;
             height: 20px;
             margin: -5px 0;
             border-radius: 10px;
-            box-shadow: 2px 2px 5px #888888;  /* Add a drop shadow */
+            box-shadow: 2px 2px 5px #888888;
         }
     """)
 

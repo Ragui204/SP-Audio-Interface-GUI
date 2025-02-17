@@ -1,13 +1,6 @@
 from PyQt5.QtWidgets import (
-    QApplication,
-    QMainWindow,
-    QWidget,
-    QHBoxLayout,
-    QVBoxLayout,
-    QStackedWidget,
-    QGridLayout,
-    QSizePolicy,
-    QSpacerItem,
+    QApplication, QMainWindow, QWidget, QHBoxLayout, QVBoxLayout,
+    QStackedWidget, QGridLayout, QSizePolicy, QSpacerItem
 )
 from PyQt5.QtCore import Qt
 from PyQt5.QtGui import QPalette, QColor, QFont
@@ -24,8 +17,7 @@ class MainWindow(QWidget):
 
     def initUI(self):
         self.setWindowTitle("Audio Interface")
-        self.setGeometry(100, 100, 600, 400)
-        # self.setFixedSize(3240, 2160)  # Remove fixed size
+        self.setGeometry(100, 100, 600, 400)  # Initial size, will resize
         self.setStyleSheet("background-color: #1E1E1E; color: white;")
 
         # Main Layout
@@ -55,7 +47,7 @@ class MainWindow(QWidget):
 
         self.setLayout(main_layout)
 
-        self.switch_tab(0)
+        self.switch_tab(0)  # Start on the first tab
 
     def switch_tab(self, index):
         self.navbar.switch_tab(index)
