@@ -1,6 +1,6 @@
 from PyQt5.QtWidgets import (
     QApplication, QMainWindow, QWidget, QHBoxLayout, QVBoxLayout,
-    QStackedWidget, QGridLayout, QSizePolicy, QSpacerItem
+    QStackedWidget, QGridLayout, QSizePolicy, QSpacerItem, QWidgetItem, QPushButton
 )
 from PyQt5.QtCore import Qt
 from PyQt5.QtGui import QPalette, QColor, QFont
@@ -17,7 +17,7 @@ class MainWindow(QWidget):
 
     def initUI(self):
         self.setWindowTitle("Audio Interface")
-        self.setGeometry(100, 100, 600, 400)  # Initial size, will resize
+        # self.setGeometry(100, 100, 600, 400)  # Remove fixed geometry
         self.setStyleSheet("background-color: #1E1E1E; color: white;")
 
         # Main Layout
@@ -124,14 +124,33 @@ class MainWindow(QWidget):
         return page
 
     def resizeEvent(self, event):
-        # Get the new size of the widget
         new_width = event.size().width()
         new_height = event.size().height()
 
-        # Adjust font sizes and element sizes based on new_width and new_height
-        #... (implementation depends on your specific requirements)
+        # Adjust font sizes
+        self.adjust_font_sizes(new_width)
 
-        # Example: Adjust font size of navigation bar
+        # Adjust control sizes (example for pads)
+        self.adjust_pad_sizes(new_width, new_height)
+
+    def adjust_font_sizes(self, width):
+        font_size = int(width * 0.02)  # Example: font size is 2% of the width
         font = self.navbar.font()
-        font.setPointSize(int(new_width * 0.02))  # Example: font size is 2% of the width
+        font.setPointSize(font_size)
         self.navbar.setFont(font)
+
+        # Adjust font sizes for other elements as needed
+
+    def adjust_pad_sizes(self, width, height):
+        # Get the layout for the pads (assuming it's accessible)
+        pad_layout = self.stacked_widget.currentWidget().layout().itemAt(0).layout()
+
+        # Calculate new size based on window dimensions
+        new_size = int(min(width, height) * 0.08)  # Example
+
+        for i in range(pad_layout.count()):
+            item = pad_layout.itemAt(i)
+            if isinstance(item, QWidgetItem):
+                widget = item.widget()
+                if isinstance(widget, QPushButton):
+                    widget.setFixedSize(new_size, new_size)
