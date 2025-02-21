@@ -4,6 +4,7 @@ from PyQt5.QtCore import Qt
 def add_midi_pads(layout):
     """ Updated MIDI Pads with 3D effect and proper positioning """
     pad_layout = QGridLayout()
+    pad_layout.setContentsMargins(10, 10, 10, 10)
     label = QLabel("🎛️ MIDI Control Pads")
     label.setStyleSheet("font-size: 20px; font-weight: bold;")
     label.setAlignment(Qt.AlignCenter)
@@ -26,7 +27,7 @@ def add_midi_pads(layout):
         """)
         
         # Make the button resize with the layout
-        button.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Expanding)  
+        button.setSizePolicy(QSizePolicy.Preferred, QSizePolicy.Preferred)  
         pad_layout.addWidget(button, i // 4, i % 4)
 
     layout.addLayout(pad_layout)

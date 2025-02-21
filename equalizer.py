@@ -29,9 +29,8 @@ def add_equalizer_controls(layout):
 
     eq_layout = QHBoxLayout()
     eq_bands = [
-        "20 Hz", "32 Hz", "64 Hz", "125 Hz", "250 Hz",
-        "500 Hz", "1 kHz", "2 kHz", "4 kHz", "8 kHz",
-        "16 kHz", "20 kHz"
+        "31 Hz", "125 Hz", "500 Hz", "2 kHz", "8 kHz",
+        "16 kHz"
     ]
 
     for band in eq_bands:
@@ -45,20 +44,20 @@ def add_equalizer_controls(layout):
         slider.setStyleSheet("""
             QSlider::groove:vertical {
                 background-color: #444;
-                width: 50px; 
+                width: 25px; 
                 border-radius: 3px;
             }
             QSlider::handle:vertical {
                 background-color: #00FF00;
                 border: 1px solid #5c5c5c;
-                height: 10px; 
+                height: 15px; 
                 margin: -2px 0;
                 border-radius: 5px;
             }
             QSlider {
-                min-height: 200px;  /* Changed from 1000px */
-                padding: 2px; 
-                margin: 5px; 
+                min-height: 150px;  /* Changed from 200px */
+                padding: 1px; 
+                margin: 2px; 
             }
         """)
         vbox.addWidget(label)
@@ -68,7 +67,7 @@ def add_equalizer_controls(layout):
     eq_container.addLayout(eq_layout)
 
     # Spacer below the EQ
-    spacer = QSpacerItem(0, 0, QSizePolicy.Minimum, QSizePolicy.Expanding)
+    spacer = QSpacerItem(0, 0, QSizePolicy.Preferred, QSizePolicy.Preferred)
     eq_container.addItem(spacer)
 
     layout.addLayout(eq_container)

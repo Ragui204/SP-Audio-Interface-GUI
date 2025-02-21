@@ -4,7 +4,7 @@ from PyQt5.QtWidgets import (
 )
 from PyQt5.QtCore import Qt
 
-def add_volume_controls(layout):
+def Delay_Reverb_Controls(layout):
     """
     Adds volume controls and other plugin controls to the layout.
     """
@@ -38,28 +38,7 @@ def add_volume_controls(layout):
     divider.setFrameShadow(QFrame.Sunken)
     main_layout.addWidget(divider)
 
-    # Volume Controls
-    volume_layout = QVBoxLayout()
-    volume_layout.setAlignment(Qt.AlignCenter)
-    volume_container = QWidget()
-    volume_container.setStyleSheet("background-color: #555;")
-    volume_container.setLayout(volume_layout)
 
-    volume_label = QLabel("Volume")
-    volume_label.setAlignment(Qt.AlignCenter)
-    volume_knob = QDial()
-    # Removed setFixedSize
-    volume_knob.setNotchesVisible(True)
-    volume_layout.addWidget(volume_label)
-    volume_layout.addWidget(volume_knob)
-    main_layout.addWidget(volume_container)
-    main_layout.addItem(QSpacerItem(0, 0, QSizePolicy.Fixed, QSizePolicy.Minimum))
-
-    # Add divider
-    divider = QFrame()
-    divider.setFrameShape(QFrame.VLine)
-    divider.setFrameShadow(QFrame.Sunken)
-    main_layout.addWidget(divider)
 
     # Delay
     delay_layout = QVBoxLayout()
@@ -70,7 +49,7 @@ def add_volume_controls(layout):
     delay_label = QLabel("Delay")
     delay_label.setAlignment(Qt.AlignCenter)
     delay_layout.addWidget(delay_label)
-    delay_layout.addItem(QSpacerItem(50, 50, QSizePolicy.Minimum, QSizePolicy.Fixed))
+    delay_layout.addItem(QSpacerItem(10, 50, QSizePolicy.Minimum, QSizePolicy.Fixed))
     delay_grid = QGridLayout()
     add_plugin(delay_grid, "Time", 0, 0)
     add_plugin(delay_grid, "Feedback", 0, 1)

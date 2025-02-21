@@ -7,8 +7,8 @@ from PyQt5.QtGui import QPalette, QColor, QFont
 from NavegationBar import NavigationBar
 from Pads import add_midi_pads
 from equalizer import add_equalizer_controls
-from volume import add_volume_controls
-from chorus import add_chorus_controls
+from DelayReverb import Delay_Reverb_Controls
+from Volume import add_volume_controls
 
 class MainWindow(QWidget):
     def __init__(self):
@@ -17,7 +17,7 @@ class MainWindow(QWidget):
 
     def initUI(self):
         self.setWindowTitle("Audio Interface")
-        self.setGeometry(100, 100, 600, 400)  # Initial size, will resize
+        #self.setGeometry(100, 100, 800, 480)  # Initial size, will resize
         self.setStyleSheet("background-color: #1E1E1E; color: white;")
 
         # Main Layout
@@ -61,8 +61,8 @@ class MainWindow(QWidget):
         right_panel = QVBoxLayout()
 
         add_midi_pads(left_panel)
-        add_volume_controls(right_panel)  # Add volume and plugins
-        add_chorus_controls(right_panel)
+        Delay_Reverb_Controls(right_panel)  # Add volume and plugins
+        add_volume_controls(right_panel)
         add_equalizer_controls(left_panel)  # Equalizer at the bottom left
 
         # Add spacer to push EQ to bottom
@@ -85,8 +85,8 @@ class MainWindow(QWidget):
         
         add_midi_pads(left_panel)
         add_equalizer_controls(left_panel)
-        add_volume_controls(right_panel)  # Add volume and plugins
-        add_chorus_controls(right_panel)
+        Delay_Reverb_Controls(right_panel)  # Add volume and plugins
+        add_volume_controls(right_panel)
         
         layout.addLayout(left_panel)
         layout.addLayout(right_panel)
@@ -100,8 +100,8 @@ class MainWindow(QWidget):
         right_panel = QVBoxLayout()
         
         add_equalizer_controls(left_panel)
+        Delay_Reverb_Controls(right_panel)
         add_volume_controls(right_panel)
-        add_chorus_controls(right_panel)
         
         layout.addLayout(left_panel)
         layout.addLayout(right_panel)
@@ -115,8 +115,8 @@ class MainWindow(QWidget):
         right_panel = QVBoxLayout()
         
         add_equalizer_controls(left_panel)
+        Delay_Reverb_Controls(right_panel)
         add_volume_controls(right_panel)
-        add_chorus_controls(right_panel)
         
         layout.addLayout(left_panel)
         layout.addLayout(right_panel)
@@ -133,5 +133,5 @@ class MainWindow(QWidget):
 
         # Example: Adjust font size of navigation bar
         font = self.navbar.font()
-        font.setPointSize(int(new_width * 0.02))  # Example: font size is 2% of the width
+        font.setPointSize(int(new_width * 0.015))  # Example: font size is 2% of the width
         self.navbar.setFont(font)
