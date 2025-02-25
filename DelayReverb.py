@@ -20,7 +20,7 @@ def Delay_Reverb_Controls(layout):
     reverb_label = QLabel("Reverb")
     reverb_label.setAlignment(Qt.AlignCenter)
     reverb_layout.addWidget(reverb_label)
-    reverb_layout.addItem(QSpacerItem(10, 50, QSizePolicy.Minimum, QSizePolicy.Fixed))
+    reverb_layout.addItem(QSpacerItem(10, 10, QSizePolicy.Minimum, QSizePolicy.Fixed))
     reverb_grid = QGridLayout()
     add_plugin(reverb_grid, "Decay", 0, 0)
     add_plugin(reverb_grid, "Size", 0, 1)

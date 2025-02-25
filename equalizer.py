@@ -29,8 +29,8 @@ def add_equalizer_controls(layout):
 
     eq_layout = QHBoxLayout()
     eq_bands = [
-        "31 Hz", "125 Hz", "500 Hz", "2 kHz", "8 kHz",
-        "16 kHz"
+        "31Hz", "125Hz", "500Hz", "2kHz", "8kHz",
+        "16kHz"
     ]
 
     for band in eq_bands:
