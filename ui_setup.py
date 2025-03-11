@@ -8,15 +8,11 @@ from Pads import add_midi_pads
 from equalizer import add_equalizer_controls
 from DelayReverb import Delay_Reverb_Controls
 from Volume import add_volume_controls
-from CanInit import Can_INIT  # ✅ Import CAN initialization
-from can_listener import start_can_listener
 
 class MainWindow(QMainWindow):
     def __init__(self):
         super().__init__()
-        self.bus = Can_INIT()  # ✅ Initialize CAN Bus
-        if self.bus:
-            start_can_listener(self.bus)
+        self.midi_pads_by_tab = {}  # Dictionary to store pads per tab
         self.initUI()
 
     def initUI(self):
@@ -30,18 +26,11 @@ class MainWindow(QMainWindow):
         self.navbar = NavigationBar(self.switch_tab)
         self.stacked_widget = QStackedWidget()
 
-        # ✅ Define CAN addresses without changing original features
-        self.can_addresses = {
-            "MIDI1": 0x100,
-            "MIDI2": 0x120,
-        }
-
-        # ✅ Keep existing tab layouts
         self.tabs = [
-            self.create_midi_tab("MIDI1"),
-            self.create_midi_tab("MIDI2"),
-            self.create_guitar1_tab(),
-            self.create_guitar2_tab()
+            self.create_midi_tab(0),  # Tab 0 - MIDI1
+            self.create_midi_tab(1),  # Tab 1 - MIDI2
+            self.create_guitar1_tab(),  # Tab 2 - Guitar1
+            self.create_guitar2_tab()   # Tab 3 - Guitar2
         ]
 
         for tab in self.tabs:
@@ -57,22 +46,24 @@ class MainWindow(QMainWindow):
         self.navbar.switch_tab(index)
         self.stacked_widget.setCurrentIndex(index)
 
-    def create_midi_tab(self, tab_name):
+    def create_midi_tab(self, tab_index):
         page = QWidget()
         layout = QHBoxLayout()
         left_panel = QVBoxLayout()
         right_panel = QVBoxLayout()
 
-        add_midi_pads(left_panel)
-        add_equalizer_controls(left_panel)  # ✅ Pass CAN bus and address
-        Delay_Reverb_Controls(right_panel, self.bus, self.can_addresses[tab_name])
-        add_volume_controls(right_panel, self.bus, self.can_addresses[tab_name])
+        # Create pads and store reference in the dictionary per tab index
+        midi_pads = add_midi_pads(left_panel)
+        self.midi_pads_by_tab[tab_index] = midi_pads
+
+        add_equalizer_controls(left_panel)
+        Delay_Reverb_Controls(right_panel)
+        add_volume_controls(right_panel)
 
         layout.addLayout(left_panel)
         layout.addLayout(right_panel)
         page.setLayout(layout)
         return page
-
 
     def create_guitar1_tab(self):
         page = QWidget()
@@ -81,8 +72,8 @@ class MainWindow(QMainWindow):
         right_panel = QVBoxLayout()
 
         add_equalizer_controls(left_panel)
-        Delay_Reverb_Controls(right_panel, self.bus, self.can_addresses[tab_name])
-        add_volume_controls(right_panel, self.bus, None)  # 🎸 No CAN needed
+        Delay_Reverb_Controls(right_panel)
+        add_volume_controls(right_panel)
 
         layout.addLayout(left_panel)
         layout.addLayout(right_panel)
@@ -90,16 +81,14 @@ class MainWindow(QMainWindow):
         return page
 
     def create_guitar2_tab(self):
-        page = QWidget()
-        layout = QHBoxLayout()
-        left_panel = QVBoxLayout()
-        right_panel = QVBoxLayout()
+        return self.create_guitar1_tab()
 
-        add_equalizer_controls(left_panel)
-        Delay_Reverb_Controls(right_panel, self.bus, self.can_addresses[tab_name])
-        add_volume_controls(right_panel, self.bus, None)  # 🎸 No CAN needed
+    def keyPressEvent(self, event):
+        current_index = self.stacked_widget.currentIndex()
+        if current_index in self.midi_pads_by_tab:
+            midi_pads = self.midi_pads_by_tab[current_index]
+            midi_pads.handle_key_event(event)
+        super().keyPressEvent(event)  # Pass the event to the base class
 
-        layout.addLayout(left_panel)
-        layout.addLayout(right_panel)
-        page.setLayout(layout)
-        return page
+
+
