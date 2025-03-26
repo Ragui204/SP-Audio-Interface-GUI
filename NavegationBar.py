@@ -26,7 +26,6 @@ class NavigationBar(QWidget):
             self.tabs.append(btn)
             self.navbar.addWidget(btn)
         
-    
     def switch_tab(self, index):
         for i, btn in enumerate(self.tabs):
             if i == index:
