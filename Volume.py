@@ -4,7 +4,7 @@ from can_handler import send_can_message  # Import CAN communication
 
 # Default values for volume
 DEFAULT_VOLUME = {
-    "Master Volume": 1.0
+    "Master Volume": 1
 }
 
 def add_volume_controls(layout, teensy_id):
