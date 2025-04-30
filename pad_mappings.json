@@ -1,0 +1,60 @@
+{
+  "3": {
+    "note": 16,
+    "sample": "Perc",
+    "sample_index": null
+  },
+  "7": {
+    "note": 19,
+    "sample": "Clap"
+  },
+  "6": {
+    "note": 16,
+    "sample": "Kick"
+  },
+  "5": {
+    "note": 17,
+    "sample": "Snare"
+  },
+  "4": {
+    "note": 16,
+    "sample": "Kick"
+  },
+  "0": {
+    "note": 40,
+    "sample": "Kick"
+  },
+  "1": {
+    "note": 41,
+    "sample": "Snare"
+  },
+  "2": {
+    "note": 16,
+    "sample": "Kick"
+  },
+  "0": {
+    "note": 20,
+    "sample": "Kick",
+    "sample_index": null
+  },
+  "1": {
+    "note": 21,
+    "sample": "Snare",
+    "sample_index": null
+  },
+  "2": {
+    "note": 22,
+    "sample": "Hat",
+    "sample_index": null
+  },
+  "3": {
+    "note": 23,
+    "sample": "Clap",
+    "sample_index": null
+  },
+  "7": {
+    "note": 19,
+    "sample": "Perc",
+    "sample_index": null
+  }
+}

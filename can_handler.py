@@ -8,43 +8,64 @@ except Exception as e:
     print(f"CAN Bus Initialization Failed: {e}")
     bus = None  # Avoid crashing the GUI
 
-# CAN IDs mapping for MIDI1 (Teensy 1) and MIDI2 (Teensy 2)
-CAN_IDS = {
-    1: {  # Teensy 1 (MIDI1)
-        "Master Volume": 0x100,
-        "Reverb Size": 0x101,
-        "Reverb Decay": 0x102,
-        "Reverb Mix": 0x103,
-        "Delay Time": 0x104,
-        "Delay Mix": 0x106,
-        "Delay Color": 0x107,
-    },
-    2: {  # Teensy 2 (MIDI2)
-        "Master Volume": 0x200,
-        "Reverb Size": 0x201,
-        "Reverb Decay": 0x202,
-        "Reverb Mix": 0x203,
-        "Delay Time": 0x204,
-        "Delay Mix": 0x206,
-        "Delay Color": 0x207,
-    }
+# Parameter ID mapping for ID 0x100-based control
+PARAM_IDS = {
+    # MIDI
+    "Reverb Mix": 1,
+    "Reverb Size": 2,
+    "Reverb Decay": 3,
+    "Delay Time": 4,
+    "Delay Mix": 5,
+    "Delay Feedback": 6,
+    "Delay Color": 7,
+    "Delay Mod": 8,
+    "Note Volume": 9,
+    "Master Volume": 10,
+    "Waveform": 11,
+
+    # Guitar1 Controls (match your checkCAN logic)
+    "Input Volume": 11,
+    "BPM": 12,
+    "DIVISION_MODE": 13,
+    "NUMBER_OF_DELAYS": 14,
+    "DELAY_GAIN": 15,
+    "REVERB_TIME": 16,
+    "REVERB_GAIN": 17,
+    "CHORUS_GAIN": 18,
+    "BASE_DELAY_MS": 19,
+    "MOD_DEPTH_MS": 20,
+    "MOD_RATE_HZ": 21,
+    "NUMBER_OF_VOICES": 22,
+    "BITCRUSHER_BITS": 23,
+    "BITCRUSHER_GAIN": 24,
+    "DRY_SIGNAL": 25,
+    "FX": 26,
+
+    #Guitar Toggles
+    "Delay Toggle": 32,
+    "Reverb Toggle": 33,
+    "Chorus Toggle": 34,
+    "Distortion Toggle": 35
 }
 
-def float_to_can_data(value):
-    """Convert a float value to a CAN-compatible byte array."""
-    return struct.pack('<f', float(value))
 
 def send_can_message(teensy_id, parameter, value):
-    """Send CAN message for a given Teensy device."""
+    """Send CAN message using ID 0x100 format with param ID and float."""
     if bus:
-        can_id = CAN_IDS.get(teensy_id, {}).get(parameter)
-        if can_id:
-            data = float_to_can_data(value)
-            msg = can.Message(arbitration_id=can_id, data=data, is_extended_id=False)
-            try:
-                bus.send(msg)
-                print(f"Sent CAN to Teensy {teensy_id}: {parameter} -> {value}")
-            except can.CanError as e:
-                print(f"CAN Error: {e}")
+        param_id = PARAM_IDS.get(parameter)
+        if param_id is None:
+            print(f"Unknown CAN parameter: {parameter}")
+            return
+
+        data = bytearray(8)
+        data[0] = param_id
+        data[1:5] = struct.pack('<f', float(value))
+
+        msg = can.Message(arbitration_id=teensy_id, data=data, is_extended_id=False)
+        try:
+            bus.send(msg)
+            print(f"📤 Sent to Teensy {teensy_id}: {parameter} = {value:.2f} [Param ID {param_id}]")
+        except can.CanError as e:
+            print(f"CAN Error: {e}")
     else:
         print(f"CAN bus not initialized. Could not send {parameter} -> {value}")
