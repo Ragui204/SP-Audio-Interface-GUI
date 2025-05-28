@@ -1,100 +1,84 @@
 # AudioLink
 
-## 🎧 Overview
-AudioLink is a real-time multi-input audio interface for musicians, built for low-latency performance. It supports two MIDI inputs, two guitar jacks, and outputs processed audio through a stereo system. The device includes EQ, reverb, delay, and modulation effects with touch UI control.
-
-Built on: **Teensy 4.1 + Raspberry Pi 5 + SGTL5000 Audio Shield + MCP2515 CAN bus**
+**A portable real-time multi-instrument digital audio processor for musicians**
 
 ---
 
-## 🗂 Repository Structure
+## Overview
+AudioLink is a real-time digital audio interface that accepts MIDI and analog guitar inputs, applies DSP effects, and outputs high-quality stereo audio. Designed for stage and studio use, it's built around the Raspberry Pi 5 and Teensy 4.1 microcontrollers.
 
+---
+
+## Team Members
+- **Corey Hoang** – Project Lead, Firmware Architect, DSP & Audio Effect Chain Developer  
+- **Jonathan Dittloff** – Electrical Engineering, PCB & Power Design & CAD Engineer  
+- **Rolando Aguirre** – Embedded Systems Engineer, Raspberry Pi Middleware & UI Integrator & Developer  
+
+---
+
+## Repository Structure
 ```
 AudioLink/
-├── README.md
+├── README.md            # This file
 ├── LICENSE
 ├── .gitignore
-├── docs/
-│   ├── architecture.md
-│   ├── block_diagram.png
-│   ├── system_overview.md
-│   └── pitch_deck.pdf
-├── firmware/
-│   ├── teensy/
-│   │   └── main_teensy_audio.ino
-│   ├── rpi/
-│   │   └── can_controller.py
-│   └── shared/
-│       └── audio_samples/
-│           ├── piano_c4.wav
-│           └── kick.wav
-├── hardware/
+├── docs/                # Pitch deck, poster, and final report
+│   ├── ECS_Expo_Poster.pdf
+│   └── Project_Report.pdf
+├── firmware/            # Teensy 4.1 code
+│   ├── audio_effects/
+│   ├── can_bus/
+│   ├── midi_parser/
+│   └── main/
+├── hardware/            # Schematics, PCB, and 3D models
 │   ├── schematics/
-│   │   └── teensy_clone_custom.sch
 │   ├── pcb_layout/
-│   │   └── board.kicad_pcb
-│   └── bom.csv
-├── team_notes/
-│   ├── project_lead/
-│   │   └── timeline.md
-│   ├── electrical/
-│   │   └── codec_routing_notes.md
-│   ├── software/
-│   │   └── canbus_parser_devlog.md
-│   └── audio_design/
-│       └── reverb_delay_mixer_tests.md
-└── tests/
-    └── audio_latency_test.md
+│   └── 3d_models/
+├── middleware/          # Raspberry Pi middleware for UI and coordination
+│   ├── ui_controller/
+│   ├── can_interface/
+│   └── service_manager/
+├── team_notes/          # Individual logs or documentation
+│   ├── corey_notes.md
+│   ├── jonathan_notes.md
+│   └── rolando_notes.md
+└── tests/               # Audio, integration, and latency tests
+    ├── test_logs/
+    ├── test_plans.md
+    └── performance_metrics.csv
 ```
 
 ---
 
-## 👥 Team Members & Roles
-- **[Your Name]** – Project Lead, Firmware Architect
-- **[Member 2]** – Electrical Engineering, PCB & Power Design
-- **[Member 3]** – DSP & Audio Effect Chain Developer
-- **[Member 4]** – Raspberry Pi Middleware & UI Integrator
+## Key Features
+- Dual analog guitar inputs with independent DSP chains
+- Dual USB MIDI input support
+- Real-time effects: EQ, delay, reverb, chorus, bitcrusher
+- Touchscreen UI for effect and volume control
+- CAN bus communication between Teensy and Raspberry Pi
+- Analog stereo output for amp or PA system
 
 ---
 
-## 🚀 Getting Started
-### Prerequisites
-- Teensyduino 1.59+
-- Arduino IDE or PlatformIO
-- Python 3.x (for RPi CAN)
-- KiCad (for PCB design)
-
-### To Build Firmware:
+## Getting Started
 ```bash
-cd firmware/teensy
-# Open in Arduino IDE or compile with Teensy CLI
+# Clone the repository
+$ git clone https://github.com/<your_team>/AudioLink.git
+
+# Navigate to Teensy firmware
+$ cd AudioLink/firmware/main
+
+# Open in Arduino IDE or PlatformIO
 ```
-
-### To Run CAN Controller:
-```bash
-cd firmware/rpi
-python3 can_controller.py
-```
-
----
-
-## Features
-- Polyphonic MIDI synth engine (16 voices)
-- Real-time guitar FX chain with EQ/Delay/Reverb/Bitcrusher
-- CAN-based low-latency communication between Pi and Teensy
-- OLED/Touchscreen control interface
-
----
-
-## Awards
-**Best Senior Project 2025 - Computer & Electrical Engineering - CSUF ECS Expo**
 
 ---
 
 ## License
-MIT License (see LICENSE file for details)
+This project is licensed under the MIT License. See [LICENSE](./LICENSE) for details.
 
 ---
 
-## Special Thanks
-Thanks to mentors, faculty, and contributors who helped us bring AudioLink to life!
+## Recognition
+**Best Senior Project (Computer & Electrical Engineering)**  
+CSUF ECS Expo 2025
+
