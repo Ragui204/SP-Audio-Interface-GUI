@@ -78,7 +78,7 @@ python3 can_controller.py
 
 ---
 
-## 🧠 Features
+## Features
 - Polyphonic MIDI synth engine (16 voices)
 - Real-time guitar FX chain with EQ/Delay/Reverb/Bitcrusher
 - CAN-based low-latency communication between Pi and Teensy
@@ -86,15 +86,15 @@ python3 can_controller.py
 
 ---
 
-## 🏆 Awards
+## Awards
 **Best Senior Project 2025 - Computer & Electrical Engineering - CSUF ECS Expo**
 
 ---
 
-## 📜 License
+## License
 MIT License (see LICENSE file for details)
 
 ---
 
-## ✨ Special Thanks
+## Special Thanks
 Thanks to mentors, faculty, and contributors who helped us bring AudioLink to life!
