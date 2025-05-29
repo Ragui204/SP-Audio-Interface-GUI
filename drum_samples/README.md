@@ -2,7 +2,7 @@
 
 This folder contains categorized audio samples used in the AudioLink drum machine.
 
-### Contents
+## Contents
 - `Clap/` – Snappy clap sounds for accent and layering
 - `Hats/` – Hi-hat and open hat samples for rhythm textures
 - `Kick/` – Kick drum samples used for beat foundations
