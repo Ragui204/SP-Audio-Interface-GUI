@@ -1,4 +1,4 @@
-## Drum Samples
+# Drum Samples
 
 This folder contains categorized audio samples used in the AudioLink drum machine.
 
