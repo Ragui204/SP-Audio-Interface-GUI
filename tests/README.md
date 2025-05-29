@@ -1,25 +1,50 @@
-# Tests – AudioLink
+# AudioLink Test Suite
 
-This directory contains standalone testing scripts used throughout development of the **AudioLink** system. These tests validate the performance and functionality of various modules, including hardware communication, audio signal routing, and UI behavior.
+This `tests/` directory contains all evaluation resources for verifying functionality, performance, and integration of the **AudioLink** system. It includes structured test plans, performance benchmarks, and log data collected during development.
+
+## Contents
+
+- `test_plans.md`  
+  Detailed testing procedures for core modules including:
+  - MIDI input
+  - CAN bus integration
+  - Guitar and piano audio effects
+  - Latency measurement
+  - System boot and UI response
+
+- `performance_metrics.csv`  
+  Quantitative data gathered during hardware/software tests, such as:
+  - Latency (ms) across different input types
+  - CPU usage on Raspberry Pi
+  - Teensy DSP load
+  - Audio throughput consistency
+
+- `test_logs/`  
+  Time-stamped logs from actual test runs, including:
+  - Console output
+  - Observed issues or anomalies
+  - Notes on debugging steps taken
 
 ## Purpose
 
-These test files helped us:
+This testing archive supports:
+- Regression testing as the system scales
+- Verification of patent-relevant performance claims
+- Future refinement of modules
 
-- Debug core features in isolation
-- Validate proper integration across Teensy, Raspberry Pi, and CAN bus
-- Quickly iterate during development cycles
+> ⚠Some tests require specific hardware to be connected (e.g., Teensy 4.1, guitar input, MIDI keyboard).
 
-## File Descriptions
+---
 
-- `DrumTest.py` – Manually triggers drum samples and confirms audio playback routing
-- `GuitarTest.py` – Tests real-time input from guitar jack and validates signal through effect chain
-- *(Add more descriptions as additional tests are created)*
+### Status
 
-## Usage
+| Area                   | Status       |
+|------------------------|--------------|
+| Audio Latency Tests    | Completed |
+| CAN Bus Messaging      | Verified  |
+| Reverb/Delay Accuracy  | Verified  |
+| GUI Navigation Tests   | In Progress |
 
-These tests are intended for local use during development. Run them from the root directory:
+---
 
-```bash
-python3 tests/DrumTest.py
-
+All team members contributed to tests based on their module responsibilities. These files are living documents and subject to updates as more results are collected.
