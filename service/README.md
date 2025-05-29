@@ -1,4 +1,4 @@
-## System Service
+# System Service
 
 This directory contains the `.service` file used to configure AudioLink as a systemd-managed auto-start service on Linux-based systems (e.g., Raspberry Pi OS).
 
