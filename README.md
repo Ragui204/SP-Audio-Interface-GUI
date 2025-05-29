@@ -10,8 +10,8 @@ AudioLink is a real-time digital audio interface that accepts MIDI and analog gu
 ---
 
 ## Team Members
-- **Corey Hoang** – Project Lead, Firmware Architect, DSP & Audio Effect Chain Developer  
-- **Jonathan Dittloff** – Electrical Engineering, PCB & Power Design & CAD Engineer  
+- **Corey Hoang** – Project Lead, Embedded Systems Engineer, Firmware Architect, DSP & Audio Effect Chain Developer  
+- **Jonathan Dittloff** – Embedded Systems Engineer, Electrical Engineering, PCB & Power Design & CAD Engineer  
 - **Rolando Aguirre** – Embedded Systems Engineer, Raspberry Pi Middleware & UI Integrator & Developer  
 
 ---
