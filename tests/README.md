@@ -32,7 +32,7 @@ This testing archive supports:
 - Verification of patent-relevant performance claims
 - Future refinement of modules
 
-> ⚠Some tests require specific hardware to be connected (e.g., Teensy 4.1, guitar input, MIDI keyboard).
+> Some tests require specific hardware to be connected (e.g., Teensy 4.1, guitar input, MIDI keyboard).
 
 ---
 
