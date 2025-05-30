@@ -30,9 +30,9 @@ AudioLink/
 │   ├── guitar/
 │   └── midi/
 ├── hardware/            # Schematics, PCB, and 3D models
-│   ├── schematics/
-│   ├── pcb_layout/
-│   └── 3d_models/
+│   ├── CAD_files/
+│   ├── PCB_layouts/
+│   └── circuit_schematics/
 ├── middleware/          # Raspberry Pi middleware for UI and coordination
 │   ├── can/
 │   ├── config/
