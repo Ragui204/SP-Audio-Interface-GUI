@@ -28,8 +28,7 @@ AudioLink/
 ├── firmware/            # Teensy 4.1 code
 │   ├── audio_effects/
 │   ├── guitar/
-│   ├── midi/
-│   └── main.py/
+│   └── midi/
 ├── hardware/            # Schematics, PCB, and 3D models
 │   ├── schematics/
 │   ├── pcb_layout/
