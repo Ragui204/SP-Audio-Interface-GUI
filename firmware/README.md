@@ -21,7 +21,8 @@ This folder contains firmware for the Teensy-based audio processing system, whic
 └── firmware/
     ├── audio_effects              
     ├── guitar        
-    ├── midi             
+    ├── midi
+    ├── tests           
     └── README.md             # This file
 ```
 
