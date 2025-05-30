@@ -18,13 +18,10 @@ This folder contains firmware for the Teensy-based audio processing system, whic
 ## Directory Structure
 
 ```
-firmware/
-└── audio_effects/
-    ├── main.cpp              # Entry point for the Teensy firmware
-    ├── AudioRouting.h        # Custom routing configuration for effects chain
-    ├── Effects/              # Modular effect implementations
-    ├── CAN_Handler.cpp       # Receives and parses CAN messages
-    ├── MIDI_Handler.cpp      # Processes incoming MIDI messages
+└── firmware/
+    ├── audio_effects              
+    ├── guitar        
+    ├── midi             
     └── README.md             # This file
 ```
 
