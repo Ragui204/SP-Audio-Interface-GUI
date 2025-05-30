@@ -28,7 +28,7 @@ AudioLink/
 ├── firmware/            # Teensy 4.1 code
 │   ├── audio_effects/
 │   ├── guitar/
-│   ├── midid/
+│   ├── midi/
 │   └── tests/
 ├── hardware/            # Schematics, PCB, and 3D models
 │   ├── CAD_files/
