@@ -28,12 +28,13 @@ AudioLink/
 ├── firmware/            # Teensy 4.1 code
 │   ├── audio_effects/
 │   ├── guitar/
-│   ├── tests/
-│   └── midi/
+│   ├── midid/
+│   └── tests/
 ├── hardware/            # Schematics, PCB, and 3D models
 │   ├── CAD_files/
 │   ├── PCB_layouts/
-│   └── circuit_schematics/
+│   ├── circuit_schematics/
+│   └── tests/
 ├── middleware/          # Raspberry Pi middleware for UI and coordination
 │   ├── can/
 │   ├── config/
