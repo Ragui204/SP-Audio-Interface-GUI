@@ -34,9 +34,11 @@ AudioLink/
 │   ├── pcb_layout/
 │   └── 3d_models/
 ├── middleware/          # Raspberry Pi middleware for UI and coordination
-│   ├── ui_controller/
-│   ├── can_interface/
-│   └── service_manager/
+│   ├── can/
+│   ├── config/
+│   ├── tests/
+│   ├── ui/
+│   └── main.py/
 ├── team_notes/          # Individual logs or documentation
 │   ├── corey_notes.md
 │   ├── jonathan_notes.md
