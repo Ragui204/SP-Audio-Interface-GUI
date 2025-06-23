@@ -85,5 +85,6 @@ This project is licensed under the MIT License. See [LICENSE](./LICENSE) for det
 **Best Senior Project (Computer & Electrical Engineering)**  
 CSUF ECS Expo 2025
 
-test: verify Discord webhook connection 3
+test: verify Discord webhook connection 4
+
 
