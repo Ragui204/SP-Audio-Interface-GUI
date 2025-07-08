@@ -1,4 +1,16 @@
 ** Notes 
-   -
-   -
-   -
+Parts to Use from Your Kit (No Purchases Needed)
+Role	Part from Your Kit
+PWM Controller	UC3842AN or UC3843AN (3 pcs each) ✅
+Power Switch	IRF540 ✅
+Freewheeling Diode	1N5822 ✅
+Gate Driver (optional)	2N2222 or 2N3904 ✅
+Output Capacitor	1000µF 16V Electrolytic ✅
+Input Capacitor	470µF 25V Electrolytic ✅
+Feedback Divider	Any resistor pair like 10k + 2.7k ✅
+Prototyping Area	5x7cm protoboard ✅
+Inductor	100µH or 150µH (from your 6×8mm inductor kit) ✅
+
+
+Two kits used: https://www.amazon.com/gp/product/B07D1GFD7R/ref=sw_img_1?smid=A319S8IJR9T8Y5&psc=1#averageCustomerReviewsAnchor 
+               https://www.amazon.com/Minidodoca-Assortment-Resistance-Individual-Compartment/dp/B0CL4SC9KL/ref=sr_1_3?crid=167RRU96VS043&dib=eyJ2IjoiMSJ9.bWKGoOWiV_D5SxVyeeIPwEp7dv-VgG6gc2NgE9zhVhNKyigf_TISWhGxGgoFlhFMcb_06HaYa8ix_zzli-tUVdbbFjUNLxqdkvQV5sM_61PMSF8YAqxKVrBkzBSFP2tK05qFQLCMNWDEjaAY4E0hP4IK9jdkbnOllhQkOuI9Ws6ZUNzA_4TuWtBIBzzz3NNtDqswlf5mlTiplYkle3egiOT8iY9TeLUpaf8CvdRkeDI.rnMrGr6yyc2kDO1HXltI2EuWQnmvHLLoDxvv1H0bViQ&dib_tag=se&keywords=inductor%2Bkit&qid=1752017041&sprefix=inductor%2Bki%2Caps%2C166&sr=8-3&th=1
